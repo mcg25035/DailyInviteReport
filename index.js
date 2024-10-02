@@ -40,6 +40,7 @@ async function processGuild(guild) {
         let report = `伺服器 ${guild.name} 的邀請連結加入人數統計：\n`;
 
         for (const invite of invites.values()) {
+            if (invite.uses === 0) continue;
             report += `連結 ${invite.code} - 使用次數：${invite.uses}\n`;
         }
 
