@@ -13,7 +13,7 @@ client.once('ready', async () => {
 
     
 
-    cron.schedule('0 6 * * *', async () => {
+    cron.schedule('0 */6 * * *', async () => {
         const guilds = client.guilds.cache;
 
         for (const guild of guilds.values()) {
@@ -41,7 +41,8 @@ async function processGuild(guild) {
 
         for (const invite of invites.values()) {
             if (invite.uses === 0) continue;
-            report += `連結 ${invite.code} - 使用次數：${invite.uses}\n`;
+            const currentDate = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+            report += `${currentDate} - 連結 ${invite.code} - 使用次數：${invite.uses}\n`;
         }
 
         channel.send(report);
